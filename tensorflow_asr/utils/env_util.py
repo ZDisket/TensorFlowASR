@@ -50,7 +50,7 @@ def setup_tpu(tpu_address=None):
     if tpu_address is None:
         resolver = tf.distribute.cluster_resolver.TPUClusterResolver()
     else:
-        resolver = tf.distribute.cluster_resolver.TPUClusterResolver(tpu="grpc://" + tpu_address)
+        resolver = tf.distribute.cluster_resolver.TPUClusterResolver(tpu=tpu_address)
     tf.config.experimental_connect_to_cluster(resolver)
     tf.tpu.experimental.initialize_tpu_system(resolver)
     logger.info(f"All TPUs: {tf.config.list_logical_devices('TPU')}")

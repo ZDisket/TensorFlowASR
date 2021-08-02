@@ -48,11 +48,13 @@ parser.add_argument("--mxp", default=False, action="store_true", help="Enable mi
 
 parser.add_argument("--pretrained", type=str, default=None, help="Path to pretrained model")
 
+parser.add_argument("--tpu", type=str, default=None, help="TPU name")
+
 args = parser.parse_args()
 
 tf.config.optimizer.set_experimental_options({"auto_mixed_precision": args.mxp})
 
-strategy = env_util.setup_strategy(args.devices)
+strategy = env_util.setup_strategy(args.devices,args.tpu)
 
 from tensorflow_asr.configs.config import Config
 from tensorflow_asr.datasets import asr_dataset
